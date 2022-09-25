@@ -1,4 +1,4 @@
-# 字典或数组原生NSLog打印的问题
+##字典或数组原生NSLog打印存在的问题
 ```objc
 NSDictionary *dict = @{
         @"name":@"大魔王",
@@ -40,4 +40,4 @@ var dict: [String : Any]  = [
 输出截图如下：
 ![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e576e76986dc403ba2184d4ab83fa393~tplv-k3u1fbpfcp-watermark.image?)
 
-但swift项目中lldb po命令打印json格式失效。虽然不是json格式，还好打印键值对时不会像OC中一样数据失真。
+但swift项目中lldb po命令打印json格式失效。
