@@ -121,6 +121,13 @@ static void sz_convertToJsonString(id obj, NSUInteger level, NSMutableString *de
             sz_convertToJsonString(obj, level, desc, tab, key);
         } else if ([obj isKindOfClass:[NSNull class]])  {
             [desc appendFormat:@"%@\t%@: null,\n", tab, key];
+        } else if ([obj isKindOfClass:[NSNumber class]]) {
+            NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+            formatter.numberStyle = NSNumberFormatterDecimalStyle;
+            formatter.maximumFractionDigits = 14;
+            NSString *bStr = [formatter stringFromNumber:obj];
+            bStr = [bStr stringByReplacingOccurrencesOfString:@"," withString:@""];
+            [desc appendFormat:@"%@\t%@: %@,\n", tab, key, bStr];
         } else {
             [desc appendFormat:@"%@\t%@: %@,\n", tab, key, obj];
         }
@@ -181,7 +188,14 @@ static void sz_convertToJsonString(id obj, NSUInteger level, NSMutableString *de
             sz_convertToJsonString(obj, level, desc, tab, nil);
         } else if ([obj isKindOfClass:[NSNull class]])  {
             [desc appendFormat:@"%@\tnull,\n", tab];
-        }  else {
+        } else if ([obj isKindOfClass:[NSNumber class]]) {
+            NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+            formatter.numberStyle = NSNumberFormatterDecimalStyle;
+            formatter.maximumFractionDigits = 14;
+            NSString *bStr = [formatter stringFromNumber:obj];
+            bStr = [bStr stringByReplacingOccurrencesOfString:@"," withString:@""];
+            [desc appendFormat:@"%@\t%@,\n", tab, bStr];
+        } else {
             [desc appendFormat:@"%@\t%@,\n", tab, obj];
         }
     }
